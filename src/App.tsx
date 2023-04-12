@@ -29,7 +29,6 @@ export default function App() {
             <Route path="/admin-details/:code" element={<AdminDetails />} />
             <Route path="/admin-details-series/:code" element={<AdminDetailsSeries />} />
           </Routes>
-          {/* To handle the modal/popups of the website */}
           <Modal />
         </BrowserRouter>
       </ModalProvider>
