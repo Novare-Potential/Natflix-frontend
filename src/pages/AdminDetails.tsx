@@ -13,7 +13,7 @@ import StatusLoading from "components/StatusLoading";
 import Fields from "data/fields-details-other.json";
 import eStatus from "types/eStatus";
 
-export default function AdminDetailsOther() {
+export default function AdminDetails() {
   // Global state
   const { code } = useParams();
 
