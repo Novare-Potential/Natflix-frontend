@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 // Project files
 import Modal from "components/Modal";
-import Admin from "pages/Admin";
+import AdminHome from "pages/AdminHome";
 import AdminContent from "pages/AdminContent";
 import AdminDetails from "pages/AdminDetails";
 import AdminDetailsSeries from "pages/AdminDetailsSeries";
@@ -24,10 +24,13 @@ export default function App() {
             <Route path="/" element={<Home />} />
             <Route path="/content/:code" element={<Content />} />
             <Route path="/video/:code" element={<VideoPlayer />} />
-            <Route path="/admin" element={<Admin />} />
+            <Route path="/admin" element={<AdminHome />} />
             <Route path="/admin-content/:code" element={<AdminContent />} />
             <Route path="/admin-details/:code" element={<AdminDetails />} />
-            <Route path="/admin-details-series/:code" element={<AdminDetailsSeries />} />
+            <Route
+              path="/admin-details-series/:code"
+              element={<AdminDetailsSeries />}
+            />
           </Routes>
           <Modal />
         </BrowserRouter>
