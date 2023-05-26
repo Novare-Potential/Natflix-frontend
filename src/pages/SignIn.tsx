@@ -19,18 +19,32 @@ export default function Login() {
   const [form, setForm] = useState({ email: "", password: "" });
 
   // Properties
-  const endPoint = "login/";
+  const END_POINT = "http://localhost:8080/auth/login";
+  const HEADERS = { "Content-Type": "application/json" };
+
+  interface IResponse {
+    data: any;
+  }
 
   // Methods
   function onSubmit(event: FormEvent): void {
     event.preventDefault();
 
-    fakeFetch(endPoint, form)
+    // @ts-ignore
+    fetch(END_POINT, {
+      method: "POST",
+      headers: HEADERS,
+      body: JSON.stringify(form),
+    })
       .then((response) => onSuccess(response.data))
       .catch((error) => onFailure(error));
+
+    // fakeFetch("login/", form)
+    //   .then((response) => onSuccess(response.data))
+    //   .catch((error) => onFailure(error));
   }
 
-  function onSuccess(returningUser: iUser) {
+  function onSuccess(returningUser: any) {
     console.log(returningUser);
     setUser(returningUser);
   }

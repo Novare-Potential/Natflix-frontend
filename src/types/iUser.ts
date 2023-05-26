@@ -1,6 +1,8 @@
 export default interface iUser {
   id: number;
-  name: string;
+  fullName: string;
   email: string;
+  token: string;
+  // role: string;
   type: number;
 }
