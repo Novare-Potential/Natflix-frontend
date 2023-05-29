@@ -19,32 +19,24 @@ export default function Login() {
   const [form, setForm] = useState({ email: "", password: "" });
 
   // Properties
+  // Warning: form may not be updated at this stage
   const END_POINT = "http://localhost:8080/auth/login";
-  const HEADERS = { "Content-Type": "application/json" };
-
-  interface IResponse {
-    data: any;
-  }
 
   // Methods
   function onSubmit(event: FormEvent): void {
     event.preventDefault();
 
-    // @ts-ignore
     fetch(END_POINT, {
       method: "POST",
-      headers: HEADERS,
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(form),
     })
-      .then((response) => onSuccess(response.data))
+      .then((response) => response.json())
+      .then((result) => onSuccess(result.data))
       .catch((error) => onFailure(error));
-
-    // fakeFetch("login/", form)
-    //   .then((response) => onSuccess(response.data))
-    //   .catch((error) => onFailure(error));
   }
 
-  function onSuccess(returningUser: any) {
+  function onSuccess(returningUser: iUser) {
     console.log(returningUser);
     setUser(returningUser);
   }
