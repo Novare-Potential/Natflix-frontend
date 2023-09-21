@@ -13,7 +13,7 @@ import iUser from "types/iUser";
 
 export default function Login() {
   // Global state
-  const { user, setUser } = useUser();
+  const { setUser, setToken } = useUser();
 
   // Local state
   const [form, setForm] = useState({ email: "", password: "" });
@@ -26,13 +26,15 @@ export default function Login() {
     event.preventDefault();
 
     fakeFetch(endPoint, form)
-      .then((response) => onSuccess(response.data))
+      .then((response) => response.json())
+      .then((result) => onSuccess(result))
       .catch((error) => onFailure(error));
   }
 
-  function onSuccess(returningUser: iUser) {
-    console.log(returningUser);
-    setUser(returningUser);
+  function onSuccess(result: any) {
+    console.log("onSuccess", result);
+    setUser(result.user);
+    setToken(result.token);
   }
 
   function onFailure(error: string) {
