@@ -19,14 +19,20 @@ export default function Login() {
   const [form, setForm] = useState({ email: "", password: "" });
 
   // Properties
-  const endPoint = "login/";
+  // Warning: form may not be updated at this stage
+  const END_POINT = "http://localhost:8080/auth/login";
 
   // Methods
   function onSubmit(event: FormEvent): void {
     event.preventDefault();
 
-    fakeFetch(endPoint, form)
-      .then((response) => onSuccess(response.data))
+    fetch(END_POINT, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(form),
+    })
+      .then((response) => response.json())
+      .then((result) => onSuccess(result.data))
       .catch((error) => onFailure(error));
   }
 
